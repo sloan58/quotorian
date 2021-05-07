@@ -13,8 +13,8 @@
         <ul class="nav">
             <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ route('home', 'dashboard') }}">
-                    <i class="nc-icon nc-bank"></i>
-                    <p>{{ __('Dashboard') }}</p>
+                    <i class="fa fa-book"></i>
+                    <p>{{ __('My Books') }}</p>
                 </a>
             </li>
         </ul>
