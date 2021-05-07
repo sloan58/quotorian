@@ -19,10 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index' ])->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', App\Http\Controllers\UserController::class)->except(['show']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index' ])->name('home');
+
+    Route::resource('user', App\Http\Controllers\UserController::class)->except(['show']);
 	Route::get('profile', [ App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 	Route::put('profile', [ App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 	Route::put('profile/password', [ App\Http\Controllers\ProfileController::class, 'password'])->name('profile.password');
