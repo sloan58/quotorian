@@ -40,7 +40,8 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="{{ asset('paper') }}/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    @livewireStyles
 </head>
 
 <body class="{{ $class }}">
@@ -75,6 +76,8 @@ The above copyright notice and this permission notice shall be included in all c
     @stack('scripts')
 
     @include('layouts.navbars.fixed-plugin-js')
+
+    @livewireScripts
 </body>
 
 </html>

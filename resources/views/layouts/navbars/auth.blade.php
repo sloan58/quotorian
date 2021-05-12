@@ -6,7 +6,7 @@
             </div>
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            {{ __('Creative Tim') }}
+            {{ env('APP_NAME', 'Laravel') }}
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -15,6 +15,12 @@
                 <a href="{{ route('home', 'dashboard') }}">
                     <i class="fa fa-book"></i>
                     <p>{{ __('My Books') }}</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'search' ? 'active' : '' }}">
+                <a href="{{ route('search') }}">
+                    <i class="fa fa-search"></i>
+                    <p>{{ __('Search Books') }}</p>
                 </a>
             </li>
         </ul>

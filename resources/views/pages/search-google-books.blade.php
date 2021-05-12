@@ -1,8 +1,8 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'dashboard'
+    'elementActive' => 'search'
 ])
 
 @section('content')
-    <livewire:dashboard />
+    <livewire:search-google-books />
 @endsection

@@ -15,7 +15,7 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        $url = 'https://www.googleapis.com/books/v1/volumes?q=Joe&maxResults=40';
+        $url = 'https://www.googleapis.com/books/v1/volumes?q=Samantha&maxResults=40';
 
         $response = Http::get($url);
 
