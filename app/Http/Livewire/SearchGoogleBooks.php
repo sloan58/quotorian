@@ -2,17 +2,24 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
+use Illuminate\Support\Facades\Http;
 
 class SearchGoogleBooks extends Component
 {
     public $term = '';
-    public $searching = false;
 
-    public function addToBookShelf($googleBook)
+    protected $listeners = ['bookAdded' => 'bookAdded'];
+
+    /**
+     * A bookAdded event was fired
+     *
+     * @param $message
+     * @param $type
+     */
+    public function bookAdded($message, $type)
     {
-        info('added', [$googleBook]);
+        flash( $message)->{$type}();
     }
 
     public function render()
@@ -30,9 +37,7 @@ class SearchGoogleBooks extends Component
     {
         if(!empty($this->term)) {
             $url = "https://www.googleapis.com/books/v1/volumes?q={$this->term}&maxResults=40";
-
             $response = Http::get($url);
-
             return $response->json()['items'];
         }
         return [];

@@ -24,8 +24,10 @@ class GoogleBooksResult extends Component
                 'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
                 'thumbnail' => $this->googleBook['volumeInfo']['imageLinks']['thumbnail']
             ]);
+            $this->emit('bookAdded', 'Book added successfully', 'success');
         } catch(\Exception $e) {
-            info($e->getMessage(), $this->googleBook);
+            logger()->error($e->getMessage(), $this->googleBook);
+            $this->emit('bookAdded', $e->getMessage(), 'error');
         }
     }
 
