@@ -12,6 +12,12 @@
                     aria-label="Search">
             </div>
         </div>
+        @if($googleBooks)
+        <div class="row justify-content-center">
+            <small class="text-default font-weight-bold">Click a book to add it to your bookshelf</small>
+        </div>
+        <hr class="mt-1"/>
+        @endif
         <div class="row imagetiles d-flex flex-wrap align-items-center">
             @foreach($googleBooks as $googleBook)
                 @if(isset($googleBook['volumeInfo']['imageLinks']['thumbnail']))
