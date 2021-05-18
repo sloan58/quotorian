@@ -23,8 +23,11 @@ class BookDetails extends Component
      */
     public function deleteBook()
     {
-        // TODO: Need delete logic
-        $this->book->delete();
+        auth()->user()->books()->detach($this->book->id);
+        auth()->user()->quotes()->where('book_id', $this->book->id)->delete();
+        if(!$this->book->quotes()->count()) {
+            $this->book->delete();
+        }
         return redirect()->route('home');
     }
 

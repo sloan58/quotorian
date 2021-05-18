@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -49,5 +50,15 @@ class User extends Authenticatable
     public function books()
     {
         return $this->belongsToMany(Book::class);
+    }
+
+    /**
+     * A User Has Many Quotes
+     *
+     * @return HasMany
+     */
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
     }
 }

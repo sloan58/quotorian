@@ -7,7 +7,7 @@
                     wire:model.debounce.500ms="term"
                     class="form-control text-center"
                     type="search"
-                    placeholder="Search Google Books"
+                    placeholder="Search Google Books..."
                     value="{{ $term }}"
                     aria-label="Search">
             </div>
@@ -29,9 +29,7 @@
             @endforeach
         </div>
         <div class="row justify-content-center">
-            <div wire:loading class="spinner-grow text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+            <div wire:loading>Loading...</div>
         </div>
     </div>
 </div>

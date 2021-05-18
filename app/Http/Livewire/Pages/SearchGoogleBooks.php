@@ -9,19 +9,6 @@ class SearchGoogleBooks extends Component
 {
     public $term = '';
 
-    protected $listeners = ['bookAdded' => 'bookAdded'];
-
-    /**
-     * A bookAdded event was fired
-     *
-     * @param $message
-     * @param $type
-     */
-    public function bookAdded($message, $type)
-    {
-        flash($message)->{$type}();
-    }
-
     public function render()
     {
         $googleBooks = $this->buildSearchHits();
@@ -38,7 +25,15 @@ class SearchGoogleBooks extends Component
         if(!empty($this->term)) {
             $url = "https://www.googleapis.com/books/v1/volumes?q={$this->term}&maxResults=40";
             $response = Http::get($url);
-            return $response->json()['items'];
+
+            $userBookshelf = auth()->user()->books()
+                ->get()
+                ->pluck('book_id')
+                ->toArray();
+
+            return array_filter($response->json()['items'], function($gBook) use ($userBookshelf){
+                return !in_array($gBook['id'], $userBookshelf);
+            });
         }
         return [];
     }

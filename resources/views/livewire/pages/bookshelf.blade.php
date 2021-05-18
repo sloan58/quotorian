@@ -6,7 +6,7 @@
                     wire:model.debounce.500ms="term"
                     class="form-control text-center"
                     type="search"
-                    placeholder="Search Bookshelf"
+                    placeholder="Search Your Bookshelf..."
                     value="{{ $term }}"
                     aria-label="Search">
             </div>

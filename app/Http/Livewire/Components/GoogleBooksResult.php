@@ -15,17 +15,17 @@ class GoogleBooksResult extends Component
     public function addToBookshelf()
     {
         try {
-            $book = Book::create([
-                'book_id' => $this->googleBook['id'],
-                'title' => $this->googleBook['volumeInfo']['title'],
-                'author' => implode(',', $this->googleBook['volumeInfo']['authors']) ?? 'Unknown',
-                'publishedDate' => $this->googleBook['volumeInfo']['publishedDate'],
-                'description' => $this->googleBook['volumeInfo']['description'],
-                'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
-                'thumbnail' => $this->googleBook['volumeInfo']['imageLinks']['thumbnail']
-            ]);
+            $book = Book::firstOrCreate(['book_id' => $this->googleBook['id']],
+                [
+                    'title' => $this->googleBook['volumeInfo']['title'],
+                    'author' => implode(',', $this->googleBook['volumeInfo']['authors']) ?? 'Unknown',
+                    'publishedDate' => $this->googleBook['volumeInfo']['publishedDate'],
+                    'description' => $this->googleBook['volumeInfo']['description'],
+                    'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
+                    'thumbnail' => $this->googleBook['volumeInfo']['imageLinks']['thumbnail']
+                ]
+            );
             $book->users()->attach(auth()->user()->id);
-            $this->emit('bookAdded', 'Book added successfully', 'success');
             return redirect()->route('book.edit', $book);
         } catch(\Exception $e) {
             logger()->error($e->getMessage(), $this->googleBook);

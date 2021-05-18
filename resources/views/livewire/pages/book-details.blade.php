@@ -13,36 +13,29 @@
     @if($addingQuote)
     <div class="row d-flex">
         <div class="col-12 text-center">
-            <textarea wire:model="quote" class="form-control" rows="10"></textarea>
+            <textarea wire:model="quote" class="form-control p-3" rows="10"></textarea>
         </div>
     </div>
     @endif
     <div class="row justify-content-start {{ $addingQuote ? 'mt-5' : '' }}">
-        <div class="col-lg-4">
+        <div class="col-4">
             <div class="card shadow">
                 <div class="card-body">
-                    <div class="row d-flex justify-content-between align-items-center mx-3">
-                        <div class="col-2 pl-0">
-                            <img
-                                src="{{ $book->thumbnail }}"
-                                class="img-responsive"
-                                style="min-height: 192px; min-width: 128px;"
-                            >
-                        </div>
-                        <div class="col-8 offset-1">
-                            <div class="row">
-                                <p class="font-weight-bold">{{ $book->title }}</p>
-                            </div>
-                            <div class="row">
-                                <ul class="list-unstyled">
-                                    <li><b>Author:</b> {{ $book->author }}</li>
-                                    <li><b>Published:</b> {{ $book->publishedDate }}</li>
-                                    <li><b>Pages:</b> {{ $book->pageCount }}</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="row d-flex justify-content-center">
+                        <img
+                            src="{{ $book->thumbnail }}"
+                            class="img-responsive mb-3"
+                            style="min-height: 192px; min-width: 128px;"
+                        >
                     </div>
-                    <div class="row d-flex justify-content-center mt-4">
+                    <div class="row justify-content-center">
+                        <ul class="list-unstyled">
+                            <li><b>Author:</b> {{ $book->author }}</li>
+                            <li><b>Published:</b> {{ $book->publishedDate }}</li>
+                            <li><b>Pages:</b> {{ $book->pageCount }}</li>
+                        </ul>
+                    </div>
+                    <div class="row d-flex justify-content-center">
                         <h5><u>Book Description</u></h5>
                     </div>
                     <div class="row d-flex justify-content-center">
