@@ -2,20 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Book;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class Dashboard extends Component
 {
-    use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $paginate = 100;
     public $term = '';
+    public $paginate = 100;
 
     public function render()
     {

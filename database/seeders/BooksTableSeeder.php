@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use Exception;
+use Faker\Factory;
 use App\Models\Book;
+use App\Models\Quote;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 
@@ -15,6 +18,8 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
+
         $url = 'https://www.googleapis.com/books/v1/volumes?q=Samantha&maxResults=40';
 
         $response = Http::get($url);
@@ -31,7 +36,14 @@ class BooksTableSeeder extends Seeder
                     'thumbnail' => $book['volumeInfo']['imageLinks']['thumbnail']
                 ]);
                 $book->users()->attach(1);
-            } catch(\Exception $e) {
+                for($i=0; $i<=10; $i++) {
+                    Quote::create([
+                        'quote' => $faker->paragraph(),
+                        'user_id' => 1,
+                        'book_id' => $book->id
+                    ]);
+                }
+            } catch(Exception $e) {
                 info($e->getMessage(), $book);
             }
         }

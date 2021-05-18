@@ -9,7 +9,7 @@ use Livewire\Component;
 class EditBook extends Component
 {
     public Book $book;
-    public $quote;
+    public $quote = '';
     public $addingQuote = false;
 
     /**
@@ -17,7 +17,6 @@ class EditBook extends Component
      */
     public function storeQuote()
     {
-        info('this was the quote: ' . $this->quote);
         try {
             Quote::create([
                 'quote' => $this->quote,
@@ -25,7 +24,9 @@ class EditBook extends Component
                 'book_id' => $this->book->id
             ]);
             $this->addingQuote = false;
+            $this->quote = '';
             flash('Quote added!')->success();
+//            $this->emit('quoteAdded');
         } catch (\Exception $e) {
             logger()->error('Could not add quote: '. $e->getMessage());
             $this->addingQuote = false;
@@ -37,7 +38,7 @@ class EditBook extends Component
     {
         info('quotes', [ $this->book->quotes]);
         return view('livewire.edit-book', [
-            'quotes' => $this->book->quotes
+            'quotes' => $this->book->quotes()->orderBy('created_at', 'desc')->get()
         ]);
     }
 }
