@@ -32,7 +32,7 @@ class Dashboard extends Component
      */
     private function buildSearchHits()
     {
-        $books = Book::with('quotes')->when($this->term, function ($query) {
+        $books = auth()->user()->books()->with('quotes')->when($this->term, function ($query) {
             $query->where('title', 'like', '%' . $this->term . '%');
             $query->orWhere('author', 'like', '%' . $this->term . '%');
             $query->orWhereHas('quotes', function($query) {

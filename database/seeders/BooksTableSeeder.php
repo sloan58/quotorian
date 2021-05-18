@@ -21,7 +21,7 @@ class BooksTableSeeder extends Seeder
 
         foreach($response->json()['items'] as $book) {
             try {
-                Book::create([
+                $book = Book::create([
                     'book_id' => $book['id'],
                     'title' => $book['volumeInfo']['title'],
                     'author' => implode(',', $book['volumeInfo']['authors']) || 'Unknown',
@@ -30,6 +30,7 @@ class BooksTableSeeder extends Seeder
                     'pageCount' => $book['volumeInfo']['pageCount'],
                     'thumbnail' => $book['volumeInfo']['imageLinks']['thumbnail']
                 ]);
+                $book->users()->attach(1);
             } catch(\Exception $e) {
                 info($e->getMessage(), $book);
             }
