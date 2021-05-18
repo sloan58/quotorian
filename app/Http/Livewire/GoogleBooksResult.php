@@ -23,7 +23,7 @@ class GoogleBooksResult extends Component
                 'description' => $this->googleBook['volumeInfo']['description'],
                 'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
                 'thumbnail' => $this->googleBook['volumeInfo']['imageLinks']['thumbnail']
-            ]);
+            ])->users()->attach(auth()->user()->id);
             $this->emit('bookAdded', 'Book added successfully', 'success');
         } catch(\Exception $e) {
             logger()->error($e->getMessage(), $this->googleBook);
