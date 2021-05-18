@@ -19,7 +19,7 @@ class SearchGoogleBooks extends Component
      */
     public function bookAdded($message, $type)
     {
-        flash( $message)->{$type}();
+        flash($message)->{$type}();
     }
 
     public function render()
