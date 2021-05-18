@@ -1,16 +1,32 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Pages;
 
 use App\Models\Book;
 use App\Models\Quote;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 
-class EditBook extends Component
+class BookDetails extends Component
 {
+    protected $listeners = ['quoteDeleted' => '$refresh'];
+
     public Book $book;
     public $quote = '';
     public $addingQuote = false;
+
+    /**
+     * Delete the Book
+     *
+     * @return RedirectResponse
+     */
+    public function deleteBook()
+    {
+        // TODO: Need delete logic
+        $this->book->delete();
+        return redirect()->route('home');
+    }
 
     /**
      * Add a new quote for this user/book set
@@ -25,7 +41,7 @@ class EditBook extends Component
             ]);
             $this->addingQuote = false;
             $this->quote = '';
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             logger()->error('Could not add quote: '. $e->getMessage());
             $this->addingQuote = false;
             flash('Quote could not be added :-(')->error();
@@ -34,8 +50,7 @@ class EditBook extends Component
 
     public function render()
     {
-        info('quotes', [ $this->book->quotes]);
-        return view('livewire.edit-book', [
+        return view('livewire.pages.book-details', [
             'quotes' => $this->book->quotes()->orderBy('created_at', 'desc')->get()
         ]);
     }

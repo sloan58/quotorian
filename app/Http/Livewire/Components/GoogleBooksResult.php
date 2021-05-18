@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Components;
 
 use App\Models\Book;
 use Livewire\Component;
@@ -18,7 +18,7 @@ class GoogleBooksResult extends Component
             $book = Book::create([
                 'book_id' => $this->googleBook['id'],
                 'title' => $this->googleBook['volumeInfo']['title'],
-                'author' => implode(',', $this->googleBook['volumeInfo']['authors']) || 'Unknown',
+                'author' => implode(',', $this->googleBook['volumeInfo']['authors']) ?? 'Unknown',
                 'publishedDate' => $this->googleBook['volumeInfo']['publishedDate'],
                 'description' => $this->googleBook['volumeInfo']['description'],
                 'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
@@ -35,6 +35,6 @@ class GoogleBooksResult extends Component
 
     public function render()
     {
-        return view('livewire.google-books-result');
+        return view('livewire.components.google-books-result');
     }
 }

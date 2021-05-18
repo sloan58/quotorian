@@ -4,5 +4,5 @@
 ])
 
 @section('content')
-    <livewire:edit-book :book="$book" />
+    <livewire:pages.bookshelf />
 @endsection

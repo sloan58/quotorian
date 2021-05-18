@@ -4,5 +4,5 @@
 ])
 
 @section('content')
-    <livewire:dashboard />
+    <livewire:pages.book-details :book="$book" />
 @endsection

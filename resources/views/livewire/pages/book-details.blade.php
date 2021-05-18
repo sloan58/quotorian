@@ -42,9 +42,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row d-flex justify-content-center">
-                        <h5>Book Description</h5>
+                    <div class="row d-flex justify-content-center mt-4">
+                        <h5><u>Book Description</u></h5>
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-10 mt-2">
@@ -52,14 +51,19 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                <div class="card-footer d-flex justify-content-center">
+                    <button wire:click="deleteBook" class="btn btn-sm btn-danger">Delete Book From Book Shelf</button>
+                </div>
             </div>
         </div>
         <div class="col-lg-8">
             <ul class="list-group">
             @foreach($quotes as $quote)
-                <li class="list-group-item mb-2">
-                    <p class="mb-0">{{ $quote->quote }}</p>
-                </li>
+                <livewire:components.quote-card
+                    :quote="$quote"
+                    :key="time() . $quote->id"
+                />
             @endforeach
             </ul>
         </div>

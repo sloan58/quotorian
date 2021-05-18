@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Pages;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
@@ -25,7 +25,7 @@ class SearchGoogleBooks extends Component
     public function render()
     {
         $googleBooks = $this->buildSearchHits();
-        return view('livewire.search-google-books', [
+        return view('livewire.pages.search-google-books', [
             'googleBooks' => $googleBooks
         ]);
     }

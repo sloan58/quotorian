@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Pages;
 
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Builder;
 
-class Dashboard extends Component
+class Bookshelf extends Component
 {
     public $term = '';
     public $paginate = 100;
@@ -13,7 +13,7 @@ class Dashboard extends Component
     public function render()
     {
         $books = $this->buildSearchHits();
-        return view('livewire.dashboard', [
+        return view('livewire.pages.bookshelf', [
             'books' => $books
         ]);
     }

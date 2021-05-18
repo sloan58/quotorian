@@ -4,5 +4,5 @@
 ])
 
 @section('content')
-    <livewire:search-google-books />
+    <livewire:pages.search-google-books />
 @endsection

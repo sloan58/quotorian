@@ -21,7 +21,7 @@
         <div class="row imagetiles d-flex flex-wrap align-items-center">
             @foreach($googleBooks as $googleBook)
                 @if(isset($googleBook['volumeInfo']['imageLinks']['thumbnail']))
-                    <livewire:google-books-result
+                    <livewire:components.google-books-result
                         :googleBook="$googleBook"
                         :key="time() . $googleBook['id']"
                     />
