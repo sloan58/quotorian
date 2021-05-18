@@ -1,6 +1,23 @@
 <div class="content">
     <div class="container ml-0">
-        <div class="row justify-content-start">
+        @include('flash::message')
+        <div class="row justify-content-start mb-3">
+            <div class="col-12">
+                @if($addingQuote)
+                <button wire:click="storeQuote" class="btn btn-sm btn-success">Save Quote</button>
+                @else
+                <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-info">Add Quote</button>
+                @endif
+            </div>
+        </div>
+        @if($addingQuote)
+        <div class="row">
+            <div class="col-12">
+                <textarea wire:model="quote" class="form-control" rows="10"></textarea>
+            </div>
+        </div>
+        @endif
+        <div class="row justify-content-start mt-5">
             <div class="col-lg-6">
                 <div class="card shadow">
                     <div class="card-body">
@@ -38,23 +55,9 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="row justify-content-center">
-                    <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="300" cols="50"></textarea>
-                        <small class="form-text text-muted text-center">Quote Text</small>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="form-group">
-                        <input class="form-control text-center" placeholder="On Page">
-                        <small class="form-text text-muted text-center">(optional)</small>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-4">
-                        <button class="btn btn-block btn-success">Add Quote</button>
-                    </div>
-                </div>
+            @foreach($quotes as $quote)
+                <p>{{ $quote->quote }}</p>
+            @endforeach
             </div>
         </div>
     </div>
