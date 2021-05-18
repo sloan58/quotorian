@@ -15,7 +15,7 @@ class GoogleBooksResult extends Component
     public function addToBookshelf()
     {
         try {
-            Book::create([
+            $book = Book::create([
                 'book_id' => $this->googleBook['id'],
                 'title' => $this->googleBook['volumeInfo']['title'],
                 'author' => implode(',', $this->googleBook['volumeInfo']['authors']) || 'Unknown',
@@ -23,8 +23,10 @@ class GoogleBooksResult extends Component
                 'description' => $this->googleBook['volumeInfo']['description'],
                 'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
                 'thumbnail' => $this->googleBook['volumeInfo']['imageLinks']['thumbnail']
-            ])->users()->attach(auth()->user()->id);
+            ]);
+            $book->users()->attach(auth()->user()->id);
             $this->emit('bookAdded', 'Book added successfully', 'success');
+            return redirect()->route('book.edit', $book);
         } catch(\Exception $e) {
             logger()->error($e->getMessage(), $this->googleBook);
             $this->emit('bookAdded', $e->getMessage(), 'error');

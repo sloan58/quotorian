@@ -25,8 +25,6 @@ class EditBook extends Component
             ]);
             $this->addingQuote = false;
             $this->quote = '';
-            flash('Quote added!')->success();
-//            $this->emit('quoteAdded');
         } catch (\Exception $e) {
             logger()->error('Could not add quote: '. $e->getMessage());
             $this->addingQuote = false;
