@@ -35,9 +35,9 @@
                             </div>
                             <div class="row">
                                 <ul class="list-unstyled">
-                                    <li>Author: {{ $book->author }}</li>
-                                    <li>Published: {{ $book->publishedDate }}</li>
-                                    <li>Pages: {{ $book->pageCount }}</li>
+                                    <li><b>Author:</b> {{ $book->author }}</li>
+                                    <li><b>Published:</b> {{ $book->publishedDate }}</li>
+                                    <li><b>Pages:</b> {{ $book->pageCount }}</li>
                                 </ul>
                             </div>
                         </div>

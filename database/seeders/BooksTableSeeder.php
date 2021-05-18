@@ -29,7 +29,7 @@ class BooksTableSeeder extends Seeder
                 $book = Book::create([
                     'book_id' => $book['id'],
                     'title' => $book['volumeInfo']['title'],
-                    'author' => implode(',', $book['volumeInfo']['authors']) || 'Unknown',
+                    'author' => implode(',', $book['volumeInfo']['authors']) ?? 'Unknown',
                     'publishedDate' => $book['volumeInfo']['publishedDate'],
                     'description' => $book['volumeInfo']['description'],
                     'pageCount' => $book['volumeInfo']['pageCount'],
