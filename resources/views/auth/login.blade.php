@@ -65,10 +65,10 @@
                         </div>
                     </div>
                 </form>
-                <a href="{{ route('password.request') }}" class="btn btn-link">
-                    {{ __('Forgot password') }}
-                </a>
-                <a href="{{ route('register') }}" class="btn btn-link float-right">
+{{--                <a href="{{ route('password.request') }}" class="btn btn-link">--}}
+{{--                    {{ __('Forgot password') }}--}}
+{{--                </a>--}}
+                <a href="{{ route('register') }}" class="btn btn-link d-flex justify-content-center">
                     {{ __('Create Account') }}
                 </a>
             </div>
