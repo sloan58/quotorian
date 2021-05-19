@@ -10,15 +10,19 @@ class QuoteCard extends Component
     public Quote $quote;
     public $isEditing = false;
     public $newQuote;
+    public $newPageNumber;
 
     public function updateQuote()
     {
-        if($this->newQuote !== $this->quote->quote && !empty($this->newQuote)) {
+        if(!empty($this->newQuote)) {
             $this->quote->update([
-                'quote' => $this->newQuote
+                'quote' => $this->newQuote,
+                'page_number' => $this->newPageNumber
             ]);
-            $this->isEditing = false;
         }
+        
+        $this->isEditing = false;
+        $this->initFormData();
     }
     /**
      * Delete the quote
@@ -34,11 +38,19 @@ class QuoteCard extends Component
      */
     public function mount()
     {
-        $this->newQuote = $this->quote->quote;
+        $this->initFormData();
     }
 
     public function render()
     {
         return view('livewire.components.quote-card');
+    }
+
+    /**
+     * Set the default values for the new quote and page number
+     */
+    private function initFormData() {
+        $this->newQuote = $this->quote->quote;
+        $this->newPageNumber = $this->quote->page_number;
     }
 }

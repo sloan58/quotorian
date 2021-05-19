@@ -40,6 +40,7 @@ class BooksTableSeeder extends Seeder
                     for($i=0; $i<=10; $i++) {
                         Quote::create([
                             'quote' => $faker->paragraph(),
+                            'page_number' => $faker->numberBetween(1,1000),
                             'user_id' => 1,
                             'book_id' => $book->id
                         ]);

@@ -14,6 +14,7 @@ class BookDetails extends Component
 
     public Book $book;
     public $quote = '';
+    public $pageNumber = '';
     public $addingQuote = false;
 
     /**
@@ -39,11 +40,13 @@ class BookDetails extends Component
         try {
             Quote::create([
                 'quote' => $this->quote,
+                'page_number' => $this->pageNumber,
                 'user_id' => auth()->user()->id,
                 'book_id' => $this->book->id
             ]);
             $this->addingQuote = false;
             $this->quote = '';
+            $this->pageNumber = '';
         } catch (Exception $e) {
             logger()->error('Could not add quote: '. $e->getMessage());
             $this->addingQuote = false;

@@ -3,7 +3,7 @@
     <div class="row justify-content-start mb-3">
         <div class="col-12">
             @if($addingQuote)
-                <button wire:click="storeQuote" class="btn btn-sm btn-success">Save Quote</button>
+                <button wire:click="storeQuote" class="btn btn-sm btn-success" {{ empty($quote) ? 'disabled' : '' }}>Save Quote</button>
                 <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-default">Cancel</button>
             @else
                 <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-info">Add Quote</button>
@@ -14,6 +14,12 @@
     <div class="row d-flex">
         <div class="col-12 text-center">
             <textarea wire:model="quote" class="form-control p-3" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="row mt-2 justify-content-start">
+        <div class="col-2 d-flex">
+            <input wire:model="pageNumber" type="text" class="form-control form-control-sm mr-2" id="page">
+            <label for="page" class="mt-2">Page|Location</label>
         </div>
     </div>
     @endif
