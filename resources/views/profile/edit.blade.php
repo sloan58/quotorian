@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="{{ asset('paper/img/mike.jpg') }}" alt="...">
+                                <img class="avatar border-gray" src="{{ Gravatar::get(auth()->user()->email, ['size'=>200]) }}" alt="...">
 
                                 <h5 class="title">{{ __(auth()->user()->name)}}</h5>
                             </a>
@@ -32,10 +32,8 @@
                             @ {{ __(auth()->user()->name)}}
                             </p>
                         </div>
-                        <p class="description text-center">
-                            {{ __('I like the way you work it') }}
-                            <br> {{ __('No diggity') }}
-                            <br> {{ __('I wanna bag it up') }}
+                        <p class="text-center">
+                            {{ $randomQuote['quote'] }}
                         </p>
                     </div>
                     <div class="card-footer">
@@ -43,21 +41,15 @@
                         <div class="button-container">
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-6 ml-auto">
-                                    <h5>{{ __('12') }}
+                                    <h5>{{ auth()->user()->books()->count() }}
                                         <br>
-                                        <small>{{ __('Files') }}</small>
-                                    </h5>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-                                    <h5>{{ __('2GB') }}
-                                        <br>
-                                        <small>{{ __('Used') }}</small>
+                                        <small>{{ Str::plural('Book', auth()->user()->books()->count()) }}</small>
                                     </h5>
                                 </div>
                                 <div class="col-lg-3 mr-auto">
-                                    <h5>{{ __('24,6$') }}
+                                    <h5>{{ auth()->user()->quotes()->count() }}
                                         <br>
-                                        <small>{{ __('Spent') }}</small>
+                                        <small>{{ Str::plural('Quote', auth()->user()->quotes()->count()) }}</small>
                                     </h5>
                                 </div>
                             </div>
@@ -66,73 +58,30 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{ __('Team Members') }}</h4>
+                        <h4 class="card-title">{{ __('Latest Quotes') }}</h4>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled team-members">
+                            @foreach($latestQuotes as $quote)
                             <li>
-                                <div class="row">
+                                <div class="row mb-2">
                                     <div class="col-md-2 col-2">
-                                        <div class="avatar">
-                                            <img src="{{ asset('paper/img/faces/ayo-ogunseinde-2.jpg') }}" alt="Circle Image"
-                                                class="img-circle img-no-padding img-responsive">
-                                        </div>
+                                        <img src="{{ $quote->book->thumbnail }}" alt="Circle Image"
+                                             class="img-no-padding img-responsive">
                                     </div>
-                                    <div class="col-md-7 col-7">
-                                        {{ __('DJ Khaled') }}
+                                    <div class="col-md-6 col-6">
+                                        {{ $quote->book->title }}
                                         <br />
                                         <span class="text-muted">
-                                            <small>{{ __('Offline') }}</small>
+                                            <small>{{ Str::limit($quote->quote, 100) }}</small>
                                         </span>
                                     </div>
-                                    <div class="col-md-3 col-3 text-right">
-                                        <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
-                                                class="fa fa-envelope"></i></button>
+                                    <div class="col-md-4 col-4">
+                                        {{ $quote->created_at->diffForHumans() }}
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2 col-2">
-                                        <div class="avatar">
-                                            <img src="{{ asset('paper/img/faces/joe-gardner-2.jpg') }}" alt="Circle Image"
-                                                class="img-circle img-no-padding img-responsive">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                            {{ __('Creative Tim') }}
-                                        <br />
-                                        <span class="text-success">
-                                            <small>{{ __('Available') }}</small>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-3 col-3 text-right">
-                                        <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
-                                                class="fa fa-envelope"></i></button>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-2 col-2">
-                                        <div class="avatar">
-                                            <img src="{{ asset('paper/img/faces/clem-onojeghuo-2.jpg') }}" alt="Circle Image"
-                                                class="img-circle img-no-padding img-responsive">
-                                        </div>
-                                    </div>
-                                    <div class="col-ms-7 col-7">
-                                        {{ __('Flume') }}
-                                        <br />
-                                        <span class="text-danger">
-                                            <small>{{ __('Busy') }}</small>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-3 col-3 text-right">
-                                        <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
-                                                class="fa fa-envelope"></i></button>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

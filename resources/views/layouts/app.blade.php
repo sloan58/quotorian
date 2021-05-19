@@ -48,7 +48,6 @@ The above copyright notice and this permission notice shall be included in all c
     
     @auth()
         @include('layouts.page_templates.auth')
-        @include('layouts.navbars.fixed-plugin')
     @endauth
     
     @guest
@@ -60,7 +59,16 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="{{ asset('paper') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('paper') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('paper') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    {{--  Set the full page image on the login page  --}}
+    <script>
+        $page = $('.full-page');
+        image_src = $page.data('image');
 
+        if (image_src !== undefined) {
+            image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>';
+            $page.append(image_container);
+        }
+    </script>
     <script>
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>

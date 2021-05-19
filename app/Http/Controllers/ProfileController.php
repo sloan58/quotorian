@@ -2,27 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
-use App\Http\Requests\PasswordRequest;
+use Exception;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ProfileRequest;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\PasswordRequest;
 
 class ProfileController extends Controller
 {
     /**
      * Show the form for editing the profile.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit()
     {
-        return view('profile.edit');
+        try {
+            $response = json_decode(Http::get('https://goquotes-api.herokuapp.com/api/v1/random?count=1')->body());
+            $randomQuote = [
+                'quote' => $response->quotes[0]->text,
+                'author' => $response->quotes[0]->author
+            ];
+        } catch (Exception $e) {
+            logger()->error('error getting qod: ' . $e->getMessage());
+            $randomQuote = [
+                'quote' => '',
+                'author' => ''
+            ];
+        }
+
+        $latestQuotes = auth()->user()->quotes()
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('profile.edit', [
+            'randomQuote' => $randomQuote,
+            'latestQuotes' => $latestQuotes
+        ]);
     }
 
     /**
      * Update the profile
      *
-     * @param  \App\Http\Requests\ProfileRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param ProfileRequest $request
+     * @return RedirectResponse
      */
     public function update(ProfileRequest $request)
     {
@@ -34,8 +60,8 @@ class ProfileController extends Controller
     /**
      * Change the password
      *
-     * @param  \App\Http\Requests\PasswordRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param PasswordRequest $request
+     * @return RedirectResponse
      */
     public function password(PasswordRequest $request)
     {

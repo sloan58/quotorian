@@ -17,11 +17,6 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="nav-link">
-                    <i class="nc-icon nc-layout-11"></i> {{ __('Dashboard') }}
-                    </a>
-                </li>
                 <li class="nav-item ">
                     <a href="{{ route('register') }}" class="nav-link">
                     <i class="nc-icon nc-book-bookmark"></i>{{ __('Register') }}
