@@ -18,10 +18,10 @@ class CreateQuotesTable extends Migration
             $table->longText('quote');
             $table->integer('user_id');
             $table->integer('book_id');
-            $table->foreign('user_id')
+            $table->foreignId('user_id')
                 ->references('id')
                 ->on('users');
-            $table->foreign('book_id')
+            $table->foreignId('book_id')
                 ->references('id')
                 ->on('books');
             $table->timestamps();
