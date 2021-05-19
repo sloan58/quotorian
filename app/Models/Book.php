@@ -45,4 +45,29 @@ class Book extends Model
     {
         return $this->hasMany(Quote::class);
     }
+
+    public static function hasNecessaryAttributes($gBook) {
+
+        $mustHave = [
+            ['id'],
+            ['volumeInfo','title'],
+            ['volumeInfo','authors'],
+            ['volumeInfo','publishedDate'],
+            ['volumeInfo','description'],
+            ['volumeInfo','pageCount'],
+            ['volumeInfo','imageLinks','thumbnail']
+        ];
+
+        foreach($mustHave as $attribute) {
+            $result = array_reduce($attribute, function($a, $b) {
+                if(isset($a[$b])) {
+                    return $a[$b];
+                } else {
+                    return false;
+                }
+            }, $gBook);
+            if (!$result) return false;
+        }
+        return true;
+    }
 }

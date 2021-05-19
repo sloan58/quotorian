@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages;
 
+use App\Models\Book;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 
@@ -31,8 +32,14 @@ class SearchGoogleBooks extends Component
                 ->pluck('book_id')
                 ->toArray();
 
-            return array_filter($response->json()['items'], function($gBook) use ($userBookshelf){
-                return !in_array($gBook['id'], $userBookshelf);
+            $eligibleBooks = array_filter($response->json()['items'], function($book) {
+                if(Book::hasNecessaryAttributes($book)) {
+                    return true;
+                }
+            });
+
+            return array_filter($eligibleBooks, function($book) use ($userBookshelf){
+                return !in_array($book['id'], $userBookshelf);
             });
         }
         return [];

@@ -25,26 +25,28 @@ class BooksTableSeeder extends Seeder
         $response = Http::get($url);
 
         foreach($response->json()['items'] as $book) {
-            try {
-                $book = Book::create([
-                    'book_id' => $book['id'],
-                    'title' => $book['volumeInfo']['title'],
-                    'author' => implode(',', $book['volumeInfo']['authors']) ?? 'Unknown',
-                    'publishedDate' => $book['volumeInfo']['publishedDate'],
-                    'description' => $book['volumeInfo']['description'],
-                    'pageCount' => $book['volumeInfo']['pageCount'],
-                    'thumbnail' => $book['volumeInfo']['imageLinks']['thumbnail']
-                ]);
-                $book->users()->attach(1);
-                for($i=0; $i<=10; $i++) {
-                    Quote::create([
-                        'quote' => $faker->paragraph(),
-                        'user_id' => 1,
-                        'book_id' => $book->id
+            if(Book::hasNecessaryAttributes($book)) {
+                try {
+                    $book = Book::create([
+                        'book_id' => $book['id'],
+                        'title' => $book['volumeInfo']['title'],
+                        'author' => implode(',', $book['volumeInfo']['authors']) ?? 'Unknown',
+                        'publishedDate' => $book['volumeInfo']['publishedDate'],
+                        'description' => $book['volumeInfo']['description'],
+                        'pageCount' => $book['volumeInfo']['pageCount'],
+                        'thumbnail' => $book['volumeInfo']['imageLinks']['thumbnail']
                     ]);
+                    $book->users()->attach(1);
+                    for($i=0; $i<=10; $i++) {
+                        Quote::create([
+                            'quote' => $faker->paragraph(),
+                            'user_id' => 1,
+                            'book_id' => $book->id
+                        ]);
+                    }
+                } catch(Exception $e) {
+                    info($e->getMessage(), $book);
                 }
-            } catch(Exception $e) {
-                info($e->getMessage(), $book);
             }
         }
     }
