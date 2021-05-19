@@ -32,9 +32,13 @@
                             @ {{ __(auth()->user()->name)}}
                             </p>
                         </div>
-                        <p class="text-center">
-                            {{ $randomQuote['quote'] }}
-                        </p>
+{{--                        <p class="text-center">--}}
+                            <blockquote class="blockquote border-0 pt-0">
+                                <p class="mb-2">{{ $randomQuote['quote'] }}</p>
+                                <footer class="blockquote-footer"><cite title="Source Title">{{ $randomQuote['author'] }}</cite></footer>
+                            </blockquote>
+
+{{--                        </p>--}}
                     </div>
                     <div class="card-footer">
                         <hr>
