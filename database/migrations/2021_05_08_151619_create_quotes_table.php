@@ -16,12 +16,12 @@ class CreateQuotesTable extends Migration
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->longText('quote');
-            $table->integer('user_id');
-            $table->integer('book_id');
-            $table->foreignId('user_id')
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
-            $table->foreignId('book_id')
+            $table->foreign('book_id')
                 ->references('id')
                 ->on('books');
             $table->timestamps();
