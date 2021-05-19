@@ -22,7 +22,7 @@ class GoogleBooksResult extends Component
                     'publishedDate' => $this->googleBook['volumeInfo']['publishedDate'],
                     'description' => $this->googleBook['volumeInfo']['description'],
                     'pageCount' => $this->googleBook['volumeInfo']['pageCount'],
-                    'thumbnail' => $this->googleBook['volumeInfo']['imageLinks']['thumbnail']
+                    'thumbnail' => str_replace('http:', 'https:', $this->googleBook['volumeInfo']['imageLinks']['thumbnail'])
                 ]
             );
             $book->users()->attach(auth()->user()->id);
