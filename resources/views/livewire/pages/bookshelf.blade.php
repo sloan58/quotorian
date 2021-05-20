@@ -11,8 +11,7 @@
                     aria-label="Search">
             </div>
         </div>
-        @if(count($books)) <hr> @endif
-        <div class="row imagetiles d-flex flex-wrap align-items-center">
+        <div class="row imagetiles d-flex flex-wrap align-items-center mt-5">
             @foreach($books as $book)
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 mb-2 h-100">
                 <a href="{{ route('book.edit', $book) }}">

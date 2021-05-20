@@ -16,9 +16,8 @@
         <div class="row justify-content-center">
             <small class="text-default font-weight-bold">Click a book to add it to your bookshelf</small>
         </div>
-        <hr class="mt-1"/>
         @endif
-        <div class="row imagetiles d-flex flex-wrap align-items-center">
+        <div class="row imagetiles d-flex flex-wrap align-items-center mt-5">
             @foreach($googleBooks as $googleBook)
                 @if(isset($googleBook['volumeInfo']['imageLinks']['thumbnail']))
                     <livewire:components.google-books-result
