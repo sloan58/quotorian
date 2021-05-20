@@ -17,14 +17,14 @@
         </div>
     </div>
     <div class="row mt-2 justify-content-start">
-        <div class="col-2 d-flex">
+        <div class="col-sm-2 d-flex">
             <input wire:model="pageNumber" type="text" class="form-control form-control-sm mr-2" id="page">
             <label for="page" class="mt-2">Page|Location</label>
         </div>
     </div>
     @endif
     <div class="row justify-content-start {{ $addingQuote ? 'mt-5' : '' }}">
-        <div class="col-4">
+        <div class="col-md-12 col-lg-4 px-sm-2">
             <div class="card shadow">
                 <div class="card-body">
                     <div class="row d-flex justify-content-center">
@@ -35,7 +35,7 @@
                         >
                     </div>
                     <div class="row justify-content-center">
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled pl-5 pl-md-0">
                             <li><b>Author:</b> {{ $book->author }}</li>
                             <li><b>Published:</b> {{ $book->publishedDate }}</li>
                             <li><b>Pages:</b> {{ $book->pageCount }}</li>
