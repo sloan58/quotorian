@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/welcome', function() {
+    return view('welcome');
+})->name('welcome');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index' ])->name('home');
@@ -22,7 +25,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/book', App\Http\Controllers\BookController::class);
 
     Route::resource('user', App\Http\Controllers\UserController::class)->except(['show']);
-
 
     Route::get('profile', [ App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 	Route::put('profile', [ App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

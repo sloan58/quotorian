@@ -10,10 +10,10 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-md-12 pt-5">
-                            <h1 class="@if(Auth::guest()) text-white @endif">{{ __('Welcome to Quotorian.') }}</h1>
+                            <h1 class="@if(Auth::guest()) text-white @endif">{{ __('Welcome to Quotorian') }}</h1>
 
                             <p class="@if(Auth::guest()) text-white @endif text-lead mt-3 mb-0">
-                                {{ __('A place to find your favorite books and save your quotes') }}
+                                {{ __('A place to save your favorite books and quotes') }}
                             </p>
                         </div>
                     </div>
