@@ -125,6 +125,25 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="row align-items-center">
+                                <label class="col-md-3 col-form-label">{{ __('Public Profile') }}</label>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input
+                                            type="checkbox"
+                                            name="profile_is_public"
+                                            class="form-control"
+                                            value="{{ auth()->user()->profile_is_public }}"
+                                            {{ auth()->user()->profile_is_public ? 'checked' : '' }}
+                                        >
+                                    </div>
+                                    @if ($errors->has('profile_is_public'))
+                                        <span class="invalid-feedback" style="display: block;" role="alert">
+                                            <strong>{{ $errors->first('profile_is_public') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer ">
                             <div class="row">

@@ -52,6 +52,12 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
+        info('request', [
+            $request->all()
+        ]);
+        $request->merge(
+            $request->has('profile_is_public') ? ['profile_is_public' => true]: ['profile_is_public' => false]
+        );
         auth()->user()->update($request->all());
 
         return back()->withStatus(__('Profile successfully updated.'));
