@@ -56,7 +56,9 @@ class ProfileController extends Controller
             $request->all()
         ]);
         $request->merge(
-            $request->has('profile_is_public') ? ['profile_is_public' => true]: ['profile_is_public' => false]
+            $request->has('profile_is_public')
+                ? ['profile_is_public' => true]
+                : ['profile_is_public' => false]
         );
         auth()->user()->update($request->all());
 
