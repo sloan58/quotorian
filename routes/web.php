@@ -21,10 +21,14 @@ Route::get('/welcome', function() {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index' ])->name('home');
+
     Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
+
     Route::resource('/book', App\Http\Controllers\BookController::class);
 
     Route::resource('user', App\Http\Controllers\UserController::class)->except(['show']);
+
+    Route::get('/quotorians', [App\Http\Controllers\HomeController::class, 'quotorians'])->name('quotorians');
 
     Route::get('profile', [ App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 	Route::put('profile', [ App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

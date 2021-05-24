@@ -28,4 +28,9 @@ class HomeController extends Controller
     {
         return view('pages.search-google-books');
     }
+
+    public function quotorians()
+    {
+        return view('pages.quotorians');
+    }
 }

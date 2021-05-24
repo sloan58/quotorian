@@ -23,6 +23,12 @@
                     <p>{{ __('Search Books') }}</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'quotorians' ? 'active' : '' }}">
+                <a href="{{ route('quotorians') }}">
+                    <i class="fa fa-users"></i>
+                    <p>{{ __('Quotorians') }}</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
