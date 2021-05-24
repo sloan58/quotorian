@@ -16,7 +16,7 @@
     </div>
     @else
     <div class="card-body">
-        {{ $quote->quote }}
+        {!! nl2br($quote->quote) !!}
         @if($quote->page_number)
         <div class="text-right">
             <p class="font-weight-light mt-2">Page: {{ $quote->page_number }}</p>
