@@ -1,5 +1,18 @@
 <div class="content">
     @include('flash::message')
+    @if(!$addingQuote)
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-6 col-sm-12">
+            <input
+                wire:model.debounce.500ms="term"
+                class="form-control text-center"
+                type="search"
+                placeholder="Search Quotes in this Book"
+                value="{{ $term }}"
+                aria-label="Search">
+        </div>
+    </div>
+    @endif
     <div class="row justify-content-start mb-3">
         <div class="col-12">
             @if($addingQuote)

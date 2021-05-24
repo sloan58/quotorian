@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire\Pages;
 
+use Exception;
 use App\Models\Book;
 use App\Models\Quote;
-use Exception;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Illuminate\Http\RedirectResponse;
 
 class BookDetails extends Component
 {
     protected $listeners = ['quoteDeleted' => '$refresh'];
 
     public Book $book;
+    public $term;
     public $quote = '';
     public $pageNumber = '';
     public $addingQuote = false;
@@ -56,8 +57,11 @@ class BookDetails extends Component
 
     public function render()
     {
+        $quotes = $this->book->quotes()->when($this->term, function($query) {
+            $query->where('quote', 'like', '%' . $this->term . '%');
+        })->orderBy('created_at', 'desc')->get();
         return view('livewire.pages.book-details', [
-            'quotes' => $this->book->quotes()->orderBy('created_at', 'desc')->get()
+            'quotes' => $quotes
         ]);
     }
 }
