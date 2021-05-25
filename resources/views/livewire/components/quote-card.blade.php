@@ -34,13 +34,16 @@
             </div>
         @else
             <button wire:click="$toggle('isEditing')" class="btn btn-sm btn-info">Edit</button>
-            <span class="d-none d-md-block">
-                Created: {{ $quote->created_at->diffForHumans() }}
-            </span>
+            @if($quote->favorite)
+            <button wire:click="$toggle('favorited')" class="btn btn-outline-danger btn-round px-2">
+                <i class="fa fa-heart"></i> Favorite
+            </button>
+            @else
+            <button wire:click="$toggle('favorited')" class="btn btn-default btn-fab btn-icon btn-round">
+                <i class="fa fa-heart"></i>
+            </button>
+            @endif
             <button wire:click="deleteQuote" class="btn btn-sm btn-danger">Delete</button>
-            <span class="d-inline-block d-none d-sm-block d-md-none">
-                {{ $quote->created_at->diffForHumans() }}
-            </span>
         @endif
     </div>
 </div>

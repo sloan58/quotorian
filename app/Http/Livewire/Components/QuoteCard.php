@@ -11,6 +11,7 @@ class QuoteCard extends Component
     public $isEditing = false;
     public $newQuote;
     public $newPageNumber;
+    public $favorited;
 
     public function updateQuote()
     {
@@ -34,11 +35,22 @@ class QuoteCard extends Component
     }
 
     /**
+     * Update the favorite property on the quote
+     */
+    public function updatedFavorited()
+    {
+        $this->quote->update([
+            'favorite' => $this->favorited
+        ]);
+    }
+
+    /**
      * The component has mounted
      */
     public function mount()
     {
         $this->initFormData();
+        $this->favorited = $this->quote->favorite;
     }
 
     public function render()

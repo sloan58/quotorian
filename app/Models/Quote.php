@@ -18,6 +18,7 @@ class Quote extends Model
     protected $fillable = [
         'quote',
         'page_number',
+        'favorite',
         'user_id',
         'book_id',
     ];
