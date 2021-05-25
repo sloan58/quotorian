@@ -13,15 +13,24 @@
         </div>
     </div>
     @endif
-    <div class="row justify-content-start mb-3">
-        <div class="col-12">
-            @if($addingQuote)
+    <div class="row d-flex justify-content-between mb-3 px-3">
+        @if($addingQuote)
+            <div>
                 <button wire:click="storeQuote" class="btn btn-sm btn-success" {{ empty($quote) ? 'disabled' : '' }}>Save Quote</button>
                 <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-default">Cancel</button>
-            @else
-                <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-info">Add Quote</button>
-            @endif
-        </div>
+            </div>
+        @else
+            <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-info">Add Quote</button>
+        @endif
+        @if($filterByFavorites)
+        <button wire:click="$toggle('filterByFavorites')" class="btn btn-info btn-round">
+            <i class="fa fa-heart"></i> Filtered by Favorites
+        </button>
+        @else
+        <button wire:click="$toggle('filterByFavorites')" class="btn btn-outline-info btn-round">
+            <i class="fa fa-heart"></i> Filter by Favorites
+        </button>
+        @endif
     </div>
     @if($addingQuote)
     <div class="row d-flex">

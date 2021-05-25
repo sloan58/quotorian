@@ -17,6 +17,7 @@ class BookDetails extends Component
     public $quote = '';
     public $pageNumber = '';
     public $addingQuote = false;
+    public $filterByFavorites = false;
 
     /**
      * Delete the Book
@@ -59,7 +60,10 @@ class BookDetails extends Component
     {
         $quotes = $this->book->quotes()->when($this->term, function($query) {
             $query->where('quote', 'like', '%' . $this->term . '%');
+        })->when($this->filterByFavorites, function($query) {
+            $query->where('favorite', true);
         })->orderBy('created_at', 'desc')->get();
+
         return view('livewire.pages.book-details', [
             'quotes' => $quotes
         ]);
