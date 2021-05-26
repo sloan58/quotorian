@@ -124,7 +124,7 @@
                             </div>
                             <div class="row align-items-center">
                                 <label class="col-md-3 col-form-label">{{ __('Public Profile') }}</label>
-                                <div class="col-md-9">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <input
                                             type="checkbox"
