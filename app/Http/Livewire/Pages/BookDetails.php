@@ -17,8 +17,13 @@ class BookDetails extends Component
     public $quote = '';
     public $pageNumber = '';
     public $addingQuote = false;
+    public $activeTab = 'quotes';
     public $filterByFavorites = false;
 
+    public function setActiveTab($tab)
+    {
+        $this->activeTab = $tab;
+    }
     /**
      * Delete the Book
      *
