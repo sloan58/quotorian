@@ -15,6 +15,17 @@
         </div>
     </div>
     @else
+    <div class="card-header text-right pt-0">
+        @if($quote->favorite)
+            <button wire:click="$toggle('favorited')" class="btn btn-sm btn-warning btn-fab btn-icon btn-round px-2 mt-2">
+                <i class="fa fa-heart"></i>
+            </button>
+        @else
+            <button wire:click="$toggle('favorited')" class="btn btn-sm btn-default btn-fab btn-icon btn-round px-2 mt-2">
+                <i class="fa fa-heart"></i>
+            </button>
+        @endif
+    </div>
     <div class="card-body">
         {!! nl2br($quote->quote) !!}
         @if($quote->page_number)
@@ -26,24 +37,19 @@
     </div>
     @endif
 
-    <div class="card-footer d-flex justify-content-between">
+    <div class="card-footer d-flex justify-content-start">
         @if($isEditing)
             <div>
                 <button wire:click="updateQuote" class="btn btn-sm btn-success">Save</button>
                 <button wire:click="$toggle('isEditing')" class="btn btn-sm btn-default">Cancel</button>
             </div>
         @else
-            <button wire:click="$toggle('isEditing')" class="btn btn-sm btn-info">Edit</button>
-            @if($quote->favorite)
-            <button wire:click="$toggle('favorited')" class="btn btn-outline-danger btn-round px-2">
-                <i class="fa fa-heart"></i> Favorite
+            <button wire:click="deleteQuote" class="btn btn-sm btn-danger btn-fab btn-icon btn-round px-2 mt-1">
+                <i class="fa fa-trash"></i>
             </button>
-            @else
-            <button wire:click="$toggle('favorited')" class="btn btn-default btn-fab btn-icon btn-round">
-                <i class="fa fa-heart"></i>
+            <button wire:click="$toggle('isEditing')" class="btn btn-sm btn-info btn-fab btn-icon btn-round px-2 mx-2 mt-1">
+                <i class="fa fa-pencil"></i>
             </button>
-            @endif
-            <button wire:click="deleteQuote" class="btn btn-sm btn-danger">Delete</button>
         @endif
     </div>
 </div>

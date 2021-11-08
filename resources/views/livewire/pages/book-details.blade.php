@@ -25,15 +25,15 @@
         </div>
         @endif
         @if($addingQuote)
-        <div class="row d-flex justify-content-between px-3 mb-3">
-            <div>
+        <div class="row justify-content-center">
+            <div class="col-6 text-center">
                 <button wire:click="storeQuote" class="btn btn-sm btn-success" {{ empty($quote) ? 'disabled' : '' }}>Save Quote</button>
                 <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-default">Cancel</button>
             </div>
         </div>
         @else
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 <div class="row d-flex justify-content-between px-3 mb-3">
                     <button wire:click="$toggle('addingQuote')" class="btn btn-sm btn-success">Add New Quote</button>
                     @if($filterByFavorites)
@@ -50,20 +50,20 @@
         </div>
         @endif
         @if($addingQuote)
-        <div class="row d-flex">
-            <div class="col-12 text-center">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 text-center">
                 <textarea wire:model="quote" class="form-control p-3" rows="10"></textarea>
             </div>
         </div>
-        <div class="row mt-2 justify-content-start">
-            <div class="col-sm-2 d-flex">
+            <div class="row justify-content-center">
+                <div class="col-2 text-center mt-2">
                 <input wire:model="pageNumber" type="text" class="form-control form-control-sm mr-2" id="page">
                 <label for="page" class="mt-2">Page|Location</label>
             </div>
         </div>
         @endif
         <div class="row justify-content-center {{ $addingQuote ? 'mt-5' : '' }}">
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 <ul class="list-group">
                 @foreach($quotes as $quote)
                     <livewire:components.quote-card
